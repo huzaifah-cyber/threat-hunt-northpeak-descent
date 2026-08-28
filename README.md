@@ -20,8 +20,10 @@ Northpeak Logistics' estate lit up with a storm of failed logons on the evening 
 
 **// HUNT ASSIGNMENT // Northpeak Descent**
 
-> From: Hunt Lead // Cyber Range SOC
-> To: Threat Hunt // On-Shift
+> **From: Hunt Lead // Cyber Range SOC**
+> 
+> **To: Threat Hunter // On-Shift**
+>
 > Re: Northpeak Logistics // post-intrusion investigation
 >
 > Someone got into the Northpeak Logistics estate on the evening of 16 June. Multiple footholds, parallel access. The operator held external remote access to the Windows infrastructure and also worked from a Linux host for reconnaissance and tooling. Between roughly 20:00 and 00:30 UTC they moved across the estate, staged tooling, set persistence, beaconed outbound, and reached the crown jewel.
@@ -31,7 +33,7 @@ Northpeak Logistics' estate lit up with a storm of failed logons on the evening 
 > What we do not yet know: which foothold came first, and how each host was reached · the internal pivot path and method · how persistence was configured, and on which host · the full C2 infrastructure and how the channel behaved · what sensitive data left, and from where.
 >
 >
-> // Hunt Lead, Cyber Range SOC · Community hunt built by Dogukan Oruc
+> **// Hunt Lead, Cyber Range SOC**
 
 ---
 
@@ -41,7 +43,7 @@ Northpeak Logistics' estate lit up with a storm of failed logons on the evening 
 
 > An operator held the front door open while everyone watched the noise. Multiple footholds, two platforms, one intrusion. The failed-logon storm is bait, the real entry authenticated clean and never tripped a thing.
 >
-> Prove the order yourself. The obvious read has Linux first, Windows second. It's not what the timeline says.
+> Prove the order yourself. The obvious read has Linux first, Windows second. But it's not what the timeline says.
 >
 > Difficulty: **Intermediate**
 >
@@ -525,4 +527,4 @@ DeviceProcessEvents
 
 2. **Correlate living-off-the-land pivot and persistence indicators as a chain:** `/dev/tcp` reachability probes, netexec-class tool installs, Run-key registry writes, and PowerShell parented by Explorer.EXE rather than by system automation each look benign alone. Together, in sequence, they describe a pivot-to-persistence path worth alerting on as a set.
 
-3. **Don't trust network telemetry alone to prove C2 visibility, and check the security stack itself:** Correlate process command-line references to outbound domains against what DeviceNetworkEvents actually captured; a beacon domain appearing only in process telemetry is a gap, not a clean result. Pair this with routine verification that security tooling hasn't been tampered with and that no unexpected binaries were dropped, since an intrusion that avoids both can otherwise run for hours unnoticed.
+3. **Don't trust network telemetry alone to prove C2 visibility, and check the security stack itself.**

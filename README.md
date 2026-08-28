@@ -6,7 +6,7 @@
 **Platform:** Windows estate + Linux host (npt-ws01, npt-srv01, npt-linux01)
 **Window:** Evening of 16 June 2026, roughly 20:00-00:30 UTC (intrusion window)
 
-<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=48&duration=3000&pause=900&color=1E90FF&background=000000FF&center=true&vCenter=true&width=1100&height=100&lines=No+exploit.+Just+a+valid+account.;Everyone+watched+the+noise;Northpeak+Descent;Sentinel+online;&repeat=true" alt="Typing SVG">
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=48&duration=2000&pause=900&color=1E90FF&background=000000FF&center=true&vCenter=true&width=1100&height=100&lines=No+exploit;Lots+of+noise;STOLEN+CREDENTIALS;Northpeak+Descent;SENTINEL+ONLINE;&repeat=true" alt="Typing SVG">
 
 ---
 

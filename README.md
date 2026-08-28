@@ -12,7 +12,7 @@
 
 ## 1. Complete Scenario
 
-### ☠️ Short Summary
+### Summary
 
 Northpeak Logistics' estate lit up with a storm of failed logons on the evening of 16 June, and it read like a brute-force break-in. It wasn't. The real entry authenticated clean: a single external address, 148.64.103.173, rode straight in over RDP and worked the Windows estate interactively from the very first minute, landing on the workstation npt-ws01 before the server npt-srv01 was ever touched, upending the obvious assumption that Linux came first. From npt-linux01, the same sancadmin account ran a short, careful escalation check, tested reachability into the Windows estate through nothing more exotic than bash's /dev/tcp pseudo-device, and pulled down netexec to prepare the pivot. Back on npt-ws01, hands-on-keyboard activity rooted in Explorer.EXE separated the operator from the machine's own PowerShell chatter, and after a few trial runs a Run-key registry entry locked in logon persistence. Command and control ran across three look-alike subdomains, only one of which the network telemetry ever actually saw, the other two survived only in process command lines, and an obfuscated beacon decoded straight to a live callout carrying the compromised hostname. On npt-srv01, a second remote session, not the one that got them in, pushed a customer data export out over that same C2 channel at an evenly spaced, automated cadence. Through all of it, nothing was disabled and nothing was dropped: the entire operation ran on tools already sitting on the boxes. Overall, this is a **clean valid-account intrusion, cross-platform pivot, and low-noise exfiltration**, carried out with living-off-the-land tooling from end to end.
 
@@ -30,13 +30,6 @@ Northpeak Logistics' estate lit up with a storm of failed logons on the evening 
 >
 > What we do not yet know: which foothold came first, and how each host was reached · the internal pivot path and method · how persistence was configured, and on which host · the full C2 infrastructure and how the channel behaved · what sensitive data left, and from where.
 >
-> The evidence is in the **law-cyber-range** Sentinel workspace, MDE tables: DeviceProcessEvents, DeviceFileEvents, DeviceNetworkEvents, DeviceRegistryEvents, DeviceLogonEvents, DeviceEvents. **Discover the schema yourself with `take 1` or `getschema`.** Authentication, process, file, registry, and network telemetry each live in their own table. Pivot across them.
->
-> Filter, or drown. This is a shared workspace. **Scope every query to `where DeviceName has_any ("npt-ws01","npt-srv01","npt-linux01")`.** If a result looks like fifty other machines, you forgot the filter.
->
-> One thing to hold from the start. The obvious story has the operator landing on Linux first and pivoting into Windows. Do not assume it. Put the Windows and Linux entries on one timeline and prove the order yourself.
->
-> Section 00 is a gate. Confirm you are set up on the right workspace before you start. The phrase to submit is in this brief: **"Northpeak hunter ready."** Acknowledge it, then begin.
 >
 > // Hunt Lead, Cyber Range SOC · Community hunt built by Dogukan Oruc
 
@@ -75,21 +68,6 @@ A cross-platform intrusion worked end to end, Windows and Linux together. This i
 **07** Treat absence as evidence. What they did not do matters. No tampering, nothing dropped, reason from the gap to how they stayed quiet.
 
 **08** Then tell the story. The finish is the chain: entry to pivot to persistence to C2 to impact, and what the evidence and its gaps prove.
-
----
-
-### Hunt Stages [gate + 5 phases]
-
-| Phase | Focus |
-|---|---|
-| **00** | Setup gate: confirm you are on the law-cyber-range workspace, acknowledge readiness with the phrase from this brief |
-| **01** | Initial access: the real entry, the order of the footholds, the operator's own client, and how the server was reached |
-| **02** | Linux recon & tooling: escalation checks, reachability testing without a scanner, and what they installed to pivot |
-| **03** | Pivot, execution, persistence: the internal hop, the operator's hands-on shells against the noise, and what they planted to survive a reboot |
-| **04** | Command & control: the look-alike channel, the one domain the network saw, the hidden two, and what the rhythm proves |
-| **05** | Impact & judgement: the theft, the session it left in, and the model that let them run this freely without touching the security stack |
-
-> **Note on the absence.** Some of the strongest findings here are things that did not happen. When a table you expect to be busy comes back quiet, that quiet is data, it usually means a stealthier method, not that nothing occurred. Reason from the gap, do not close on it.
 
 ---
 
